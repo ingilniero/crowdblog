@@ -73,8 +73,8 @@ module  Crowdblog
         published_and_ordered.where(author_id: author_id)
       end
 
-      def last_published(number)
-        published_and_ordered.limit(number)
+      def last_published(number, page = 1)
+        published_and_ordered.page(page).per(number)
       end
 
       def order_by_publish_date
@@ -103,7 +103,7 @@ module  Crowdblog
     end
 
     # Must be after Class methods (otherwise a missing method error will raise)
-    scope :for_index,     last_published(3)
+    scope :for_index,  lambda  { |page = 1|  last_published(3, page) }
     scope :for_history,   last_published(13)
     scope :all_for_feed,  last_published(15)
 

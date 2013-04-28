@@ -1,5 +1,6 @@
 Crowdblog::Engine.routes.draw do
   root :to => 'posts#index'
+  match '/page/:page' => 'posts#index'
 
   namespace :admin do
     resources :authors, only: :index
