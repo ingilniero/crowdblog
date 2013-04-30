@@ -74,7 +74,8 @@ module  Crowdblog
       end
 
       def last_published(number, page = 1)
-        published_and_ordered.page(page).per(number)
+        posts = published_and_ordered
+        post.page(page).per(number) unless posts.empty?
       end
 
       def order_by_publish_date
